@@ -1,13 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function DetailScreen() {
+  const location = useLocation();
+
+  const w = location.state.item;
   return (
     <>
-      <h1>Detail Screen</h1>
       <Link to="/">
-        {" "}
-        <h2>GO BACK TO THE LIST</h2>
+        <h2>GO BACK TO THE LIST</h2> 
       </Link>
+      <h1>Detail Screen of {w["title"]}</h1>
+      <img src={w["images"][0]["large"]} />
+      <p>{w['description']}</p>
     </>
   );
 }

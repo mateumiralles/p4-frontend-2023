@@ -19,7 +19,7 @@ function ListScreen(){
                  {wantedList.map((w) => (
                    <li>
                      <div>
-                        <Link to="/:title"><h5>{w["title"]}</h5></Link>
+                        <Link state={{item: w}} to={w["uid"]}><h5>{w["title"]}</h5></Link>
                         
                        <img src={w["images"][0]["thumb"]} />
                        <p>{w["description"]}</p>
