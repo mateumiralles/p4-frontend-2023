@@ -1,5 +1,7 @@
 //import "./App.css";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -14,16 +16,32 @@ function App() {
   });
 
   return (
-    <>
-      <h1>FBI MOST WANTED</h1>
-      <ol>
-        {wantedList.map((w) => (
-          <li>
-            <div> <h5>{w["title"]}</h5> <img src={w['images'][0]['thumb']}  /><p>{w["description"]}</p></div>
-          </li>
-        ))}
-      </ol>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <h1>FBI MOST WANTED</h1>
+              <ol>
+                {wantedList.map((w) => (
+                  <li>
+                    <div>
+                      {" "}
+                      <h5>{w["title"]}</h5>{" "}
+                      <img src={w["images"][0]["thumb"]} />
+                      <p>{w["description"]}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </>
+          }
+        />
+        <Route path="/detail" element={<h1>Detail Screen</h1>}/>
+        <Route path="/*" element={<h1>The page you are looking for is not avaliable!</h1>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
