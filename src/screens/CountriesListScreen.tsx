@@ -18,23 +18,29 @@ function CountriesListScreen() {
   return (
     <>
       <h1>COUNTRIES LIST</h1>
-      <ol>
-        {countriesList.map((c) => (
-          <li>
-            <div>
-              <Link state={{ item: c }} to={c["name"]["common"]}>
-                <h5>{c["name"]["common"]}</h5>
-              </Link>
-              <h5>{c["name"]["common"]}</h5>
-              <img
-                height="45"
-                src={c["flags"]["svg"]}
-                alt={c["flags"]["alt"]}
-              />
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className="columns-2">
+        {countriesList.map((c) => {
+          return (
+            <Link state={{ item: c }} to={c["name"]["common"]}>
+              <div
+                className="grid justify-items-center border  border-black rounded mb-8"
+                key={c["name"]["common"]}
+              >
+                <div className="basis-1/2" >
+                  <p className="text-2xl font-bold">{c["name"]["common"]}</p>
+                </div>
+                <div className="basis-1/2">
+                  <img
+                    className="h-10 m-3"
+                    src={c["flags"]["svg"]}
+                    alt={c["flags"]["alt"]}
+                  />
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </>
   );
 }
