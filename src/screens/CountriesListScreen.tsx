@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import ListTile from "../components/listTile";
+import LoadingMsg from "../components/loadingMsg";
+import TitleSidebar from "../components/titleSidebar";
 
 function CountriesListScreen() {
   const [countriesList, setList] = useState([]);
@@ -17,29 +19,17 @@ function CountriesListScreen() {
   }, []);
   return (
     <>
-      <h1>COUNTRIES LIST</h1>
-      <div className="columns-2">
-        {countriesList.map((c) => {
-          return (
-            <Link state={{ item: c }} to={c["name"]["common"]}>
-              <div
-                className="grid justify-items-center border  border-black rounded mb-8"
-                key={c["name"]["common"]}
-              >
-                <div className="basis-1/2" >
-                  <p className="text-2xl font-bold">{c["name"]["common"]}</p>
-                </div>
-                <div className="basis-1/2">
-                  <img
-                    className="h-10 m-3"
-                    src={c["flags"]["svg"]}
-                    alt={c["flags"]["alt"]}
-                  />
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+      <div className="flex flex-row h-full w-full  bg-cyan-500">
+        <TitleSidebar />
+        {countriesList.length < 1 ? (
+          <LoadingMsg />
+        ) : (
+          <div className="flex flex-col w-full py-8 items-center bg-cyan-500">
+            {countriesList.map((country) => {
+              return <ListTile c={country} />;
+            })}
+          </div>
+        )}
       </div>
     </>
   );
