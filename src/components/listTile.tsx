@@ -13,7 +13,7 @@ function ListTile(props: any) {
           </div>
           <div>
             <img
-              className="h-5 m-3"
+              className="h-5 m-3 border border-black"
               src={ props.c["flags"]["svg"]}
               alt={ props.c["flags"]["alt"]}
             />
