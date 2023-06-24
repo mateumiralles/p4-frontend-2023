@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ListTile from "../components/listTile";
-import LoadingMsg from "../components/loadingMsg";
+import FeedbackMsg from "../components/feedbackMsg";
 import TitleSidebar from "../components/titleSidebar";
 import SearchBar from "../components/searchBar";
 
@@ -24,18 +24,26 @@ function CountriesListScreen() {
       <div className="flex flex-row h-full w-full  bg-cyan-500">
         <TitleSidebar />
         {countriesList.length < 1 ? (
-          <LoadingMsg />
+          <FeedbackMsg msg='loading...'/>
         ) : (
           <div className="flex flex-col w-full py-8 items-center bg-cyan-500">
             <SearchBar onQuery={setQuery} />
 
-            {countriesList
-              .filter((n) =>
-                n["name"]["common"].toLowerCase().includes(query.toLowerCase())
-              )
-              .map((country) => {
-                return <ListTile c={country} />;
-              })}
+            {countriesList.filter((n) =>
+              n["name"]["common"].toLowerCase().includes(query.toLowerCase())
+            ).length > 0 ? (
+              countriesList
+                .filter((n) =>
+                  n["name"]["common"]
+                    .toLowerCase()
+                    .includes(query.toLowerCase())
+                )
+                .map((country) => {
+                  return <ListTile c={country} />;
+                })
+            ) : (
+              <FeedbackMsg msg='Results not found, check your query!'/>
+             )}
           </div>
         )}
       </div>
