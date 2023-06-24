@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ListTile(props: any) {
+const ListTile = (props: any) => {
   return (
     <>
       <Link className="w-2/3" state={{ item: props.c }} to={ props.c["name"]["common"]}>

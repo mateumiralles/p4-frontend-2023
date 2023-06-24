@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import ListTile from "../components/listTile";
 import LoadingMsg from "../components/loadingMsg";
 import TitleSidebar from "../components/titleSidebar";
+import SearchBar from "../components/searchBar";
 
 function CountriesListScreen() {
-  const [countriesList, setList] = useState([]);
+  const [countriesList, setList] = useState<any[]>([]);
+  const [query, setQuery] = useState("");
   useEffect(() => {
     const fetch = async () => {
       //Potser implementar mes endavant translations i maps
@@ -25,9 +27,15 @@ function CountriesListScreen() {
           <LoadingMsg />
         ) : (
           <div className="flex flex-col w-full py-8 items-center bg-cyan-500">
-            {countriesList.map((country) => {
-              return <ListTile c={country} />;
-            })}
+            <SearchBar onQuery={setQuery} />
+
+            {countriesList
+              .filter((n) =>
+                n["name"]["common"].toLowerCase().includes(query.toLowerCase())
+              )
+              .map((country) => {
+                return <ListTile c={country} />;
+              })}
           </div>
         )}
       </div>
