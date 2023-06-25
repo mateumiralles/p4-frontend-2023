@@ -5,7 +5,7 @@ const ListTile = (props: any) => {
     <>
       <Link className="my-2 flex min-h-min w-full justify-center" state={{ item: props.c }} to={ props.c["name"]["common"]}>
         <div
-          className="flex h-16  w-2/3  items-center justify-center bg-cyan-600 rounded-lg shadow-cyan-700 shadow-md"
+          className="flex h-16  w-2/3  items-center justify-center bg-cyan-600 rounded-lg shadow-cyan-700 shadow-md hover:bg-cyan-700"
           key={ props.c["name"]["common"]}
         >
             <img
