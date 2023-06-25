@@ -5,7 +5,7 @@ const SearchBar = ({ onQuery }: any) => {
   return (
     <>
       <input
-        className="w-1/3 h-9 rounded-xl p-3 text-center text-xl"
+        className="w-1/2 h-16 my-5 rounded-xl p-6 text-center text-3xl font-bold outline-none bg-cyan-400 placeholder-white"
         placeholder="Type here to search!"
         onInput={handleInput}
       >

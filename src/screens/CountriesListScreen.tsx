@@ -10,11 +10,13 @@ function CountriesListScreen() {
   const [query, setQuery] = useState("");
   useEffect(() => {
     const fetch = async () => {
-      //Potser implementar mes endavant translations i maps
       const result = await axios(
         "https://restcountries.com/v3.1/all?fields=name,flags,capital,region,subregion,languages,area,population,timezones,latlng"
       );
-      setList(result.data);
+      setList(
+        //List setting and sorting alphabetically
+        result.data.sort((a: any, b: any) => a["name"]["common"].localeCompare(b["name"]["common"]))
+      );
       console.log(result.data);
     };
     fetch();
@@ -24,11 +26,10 @@ function CountriesListScreen() {
       <div className="flex flex-row h-full w-full  bg-cyan-500">
         <TitleSidebar />
         {countriesList.length < 1 ? (
-          <FeedbackMsg msg='loading...'/>
+          <FeedbackMsg msg="loading..." />
         ) : (
-          <div className="flex flex-col w-full py-8 items-center bg-cyan-500">
+          <div className="flex flex-col w-2/3 py-8 items-center bg-cyan-500">
             <SearchBar onQuery={setQuery} />
-
             {countriesList.filter((n) =>
               n["name"]["common"].toLowerCase().includes(query.toLowerCase())
             ).length > 0 ? (
@@ -42,8 +43,8 @@ function CountriesListScreen() {
                   return <ListTile c={country} />;
                 })
             ) : (
-              <FeedbackMsg msg='Results not found, check your query!'/>
-             )}
+              <FeedbackMsg msg="Results not found, check your query!" />
+            )}
           </div>
         )}
       </div>
