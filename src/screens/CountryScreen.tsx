@@ -11,7 +11,7 @@ function CountryScreen() {
   const cName: string = c["name"]["common"];
   const cReg: string = c["region"];
   const cSubReg: string = c["subregion"];
-  const cCap: string = c["capital"][0];
+  const cCap: string = c["capital"][0]===undefined ? 'Does not have capital city!' :  c["capital"][0];
   const cCapLatLong: string = `(${c["latlng"][0].toFixed(2)}, ${c[
     "latlng"
   ][1].toFixed(2)})`;
